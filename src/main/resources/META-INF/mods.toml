@@ -1,0 +1,50 @@
+license="All rights reserved"
+
+modLoader="javafml" #mandatory
+
+loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+
+issueTrackerURL="http://my.issue.tracker/" #optional
+
+[[mods]] #mandatory
+
+modId="sorcery" #mandatory
+
+version="0.0.1" #mandatory
+
+displayName="Sorcery" #mandatory
+
+updateJSONURL="http://myurl.me/" #optional
+
+displayURL="http://example.com/" #optional
+
+logoFile="examplemod.png" #optional
+
+credits="President Obama" #optional
+
+# A text field displayed in the mod UI
+authors="yameatmeyourdead" #optional
+
+description='''
+	This is a description. Very accurate Description only the very best. funny haha gamer epic moment compliation #24
+'''
+
+[[dependencies.bruh]]
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[36,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+    
+# Here's another dependency
+[[dependencies.bruh]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,)"
+    ordering="NONE"
+    side="BOTH"
