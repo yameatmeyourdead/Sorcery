@@ -78,7 +78,6 @@ public class Sigil {
         return image;
     }
 
-
     // 72 Demon sigils this pains me to look at
     public static final Sigil KING_BAEL = new Sigil("king_bael", 0xffff73, "e");
     public static final Sigil DUKE_AGARES = new Sigil("duke_agares", 0xffff73, "e");
@@ -159,5 +158,11 @@ public class Sigil {
     // public static final Sigil AMAYMON = null; // Amaimon/Amoymon
     // public static final Sigil PAIMON = null;  // Paymon
 
-    // other
+    // primal sigils
+    public static final Sigil EARTH = new Sigil("earth", 0xffff73, "e");
+    public static final Sigil FIRE = new Sigil("fire", 0xffff73, "e");
+    public static final Sigil WIND = new Sigil("wind", 0xffff73, "e");
+    public static final Sigil AIR = new Sigil("air", 0xffff73, "e");
+    public static final Sigil DARK = new Sigil("chaos", 0xffff73, "e");
+    public static final Sigil LIGHT = new Sigil("order", 0xffff73, "e");
 }

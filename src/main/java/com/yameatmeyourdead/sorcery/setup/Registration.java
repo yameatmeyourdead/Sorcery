@@ -13,6 +13,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -31,12 +32,13 @@ public class Registration {
     // private static final DeferredRegister<Block> DIMENSIONS = DeferredRegister.create(ForgeRegistries.MOD_DIMENSIONS, MODID);
 
     public static void init() {
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        // DIMENSIONS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        IEventBus bussy = FMLJavaModLoadingContext.get().getModEventBus();
+        BLOCKS.register(bussy);
+        ITEMS.register(bussy);
+        TILES.register(bussy);
+        CONTAINERS.register(bussy);
+        ENTITIES.register(bussy);
+        // DIMENSIONS.register(bussy);
     }
 
     // Register Blocks
