@@ -1,7 +1,6 @@
 package com.yameatmeyourdead.sorcery.tools;
 
 import com.yameatmeyourdead.sorcery.Sorcery;
-import com.yameatmeyourdead.sorcery.events.SigilRegistryEvent;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -16,9 +15,4 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 @EventBusSubscriber(modid = Sorcery.MODID, bus = Bus.FORGE)
 public class EventHandler {
     private static final IEventBus bus = MinecraftForge.EVENT_BUS;
-
-    @SubscribeEvent
-    public static void onSigilRegistryEvent(SigilRegistryEvent event) {
-        // TODO: Implement
-    }
 }

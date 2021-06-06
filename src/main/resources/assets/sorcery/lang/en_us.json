@@ -1,3 +1,8 @@
 {
-    "item.sorcery.signomicon" : "Signomicon"
+    "item.sorcery.signomicon": "Signomicon",
+    "item.sorcery.runic_inscriber": "Runic Inscriber",
+
+    "block.sorcery.crucible": "Crucible",
+
+    "itemGroup.sorcery": "Sorcery"
 }

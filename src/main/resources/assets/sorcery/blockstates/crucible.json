@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "sorcery:block/crucible" },
+        "facing=east": { "model": "sorcery:block/crucible", "y": 90 },
+        "facing=south": { "model": "sorcery:block/crucible", "y": 180 },
+        "facing=west": { "model": "sorcery:block/crucible", "y": 270 }
+    }
+}

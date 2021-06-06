@@ -15,29 +15,91 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.IBooleanFunction;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
 public class Crucible extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     private static final VoxelShape SHAPE_N = Stream.of(
-        VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 3, 5.751851851851853, 9.862962962962964, 4, 9.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 4, 9.751851851851853, 9.862962962962964, 5, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 4, 3.7518518518518533, 9.862962962962964, 5, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(4.862962962962963, 4, 4.751851851851853, 5.862962962962963, 5, 10.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 4, 4.751851851851853, 10.862962962962964, 5, 10.751851851851853), VoxelShapes.combineAndSimplify(Block.box(10.862962962962964, 4, 5.751851851851853, 11.862962962962964, 6, 9.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 4, 5.751851851851853, 4.862962962962963, 6, 9.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 5, 9.751851851851853, 5.862962962962963, 7, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 5, 3.7518518518518533, 5.862962962962963, 7, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 5, 3.7518518518518533, 11.862962962962964, 7, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 5, 9.751851851851853, 11.862962962962964, 7, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 5, 10.751851851851853, 9.862962962962964, 6, 12.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 5, 2.7518518518518533, 9.862962962962964, 6, 4.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 6, 2.7518518518518533, 11.862962962962964, 9, 3.7518518518518533), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 6, 11.751851851851853, 11.862962962962964, 9, 12.751851851851853), VoxelShapes.combineAndSimplify(Block.box(2.862962962962963, 6, 3.7518518518518533, 3.862962962962963, 9, 11.751851851851853), Block.box(11.862962962962964, 6, 3.7518518518518533, 12.862962962962964, 9, 11.751851851851853), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON),
-        VoxelShapes.combineAndSimplify(Block.box(10.862962962962964, 0, 3.7518518518518533, 11.862962962962964, 3, 4.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 0, 3.7518518518518533, 4.862962962962963, 3, 4.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 2, 4.751851851851853, 10.862962962962964, 4, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 0, 10.751851851851853, 4.862962962962963, 3, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(4.862962962962963, 2, 4.751851851851853, 5.862962962962963, 4, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 2, 9.751851851851853, 10.862962962962964, 4, 10.751851851851853), VoxelShapes.combineAndSimplify(Block.box(10.862962962962964, 0, 10.751851851851853, 11.862962962962964, 3, 11.751851851851853), Block.box(4.862962962962963, 2, 9.751851851851853, 5.862962962962963, 4, 10.751851851851853), IBooleanFunction.CA), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS),
-        Block.box(3.862962962962963, 7, 3.7518518518518533, 11.862962962962964, 8, 11.751851851851853),
-        Block.box(5.862962962962963, 8, 9.451851851851853, 6.862962962962963, 12, 10.451851851851853)
-        ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);});;
-    
+        Block.box(15, 0, 14, 16, 4, 15),
+        Block.box(0, 0, 14, 1, 4, 15),
+        Block.box(15, 0, 1, 16, 4, 2),
+        Block.box(14, 0, 0, 15, 4, 1),
+        Block.box(14, 0, 15, 15, 4, 16),
+        Block.box(0, 0, 1, 1, 4, 2),
+        Block.box(1, 0, 0, 2, 4, 1),
+        Block.box(1, 0, 15, 2, 4, 16),
+        Block.box(1, 2, 1, 15, 3, 15),
+        Block.box(14, 3, 1, 15, 16, 15),
+        Block.box(1, 3, 1, 2, 16, 15),
+        Block.box(2, 3, 1, 14, 16, 2),
+        Block.box(2, 3, 14, 14, 16, 15),
+        Block.box(0, 0, 0, 1, 2, 1),
+        Block.box(15, 0, 0, 16, 2, 1),
+        Block.box(0, 0, 15, 1, 2, 16), Block.box(15, 0, 15, 16, 2, 16)).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();;
     private static final VoxelShape SHAPE_E = Stream.of(
-        VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 3, 5.751851851851853, 9.862962962962964, 4, 9.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 4, 9.751851851851853, 9.862962962962964, 5, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 4, 3.7518518518518533, 9.862962962962964, 5, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(4.862962962962963, 4, 4.751851851851853, 5.862962962962963, 5, 10.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 4, 4.751851851851853, 10.862962962962964, 5, 10.751851851851853), VoxelShapes.combineAndSimplify(Block.box(10.862962962962964, 4, 5.751851851851853, 11.862962962962964, 6, 9.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 4, 5.751851851851853, 4.862962962962963, 6, 9.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 5, 9.751851851851853, 5.862962962962963, 7, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 5, 3.7518518518518533, 5.862962962962963, 7, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 5, 3.7518518518518533, 11.862962962962964, 7, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 5, 9.751851851851853, 11.862962962962964, 7, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 5, 10.751851851851853, 9.862962962962964, 6, 12.751851851851853), VoxelShapes.combineAndSimplify(Block.box(5.862962962962963, 5, 2.7518518518518533, 9.862962962962964, 6, 4.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 6, 2.7518518518518533, 11.862962962962964, 9, 3.7518518518518533), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 6, 11.751851851851853, 11.862962962962964, 9, 12.751851851851853), VoxelShapes.combineAndSimplify(Block.box(2.862962962962963, 6, 3.7518518518518533, 3.862962962962963, 9, 11.751851851851853), Block.box(11.862962962962964, 6, 3.7518518518518533, 12.862962962962964, 9, 11.751851851851853), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON), IBooleanFunction.CAULDRON),
-        VoxelShapes.combineAndSimplify(Block.box(10.862962962962964, 0, 3.7518518518518533, 11.862962962962964, 3, 4.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 0, 3.7518518518518533, 4.862962962962963, 3, 4.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 2, 4.751851851851853, 10.862962962962964, 4, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(3.862962962962963, 0, 10.751851851851853, 4.862962962962963, 3, 11.751851851851853), VoxelShapes.combineAndSimplify(Block.box(4.862962962962963, 2, 4.751851851851853, 5.862962962962963, 4, 5.751851851851853), VoxelShapes.combineAndSimplify(Block.box(9.862962962962964, 2, 9.751851851851853, 10.862962962962964, 4, 10.751851851851853), VoxelShapes.combineAndSimplify(Block.box(10.862962962962964, 0, 10.751851851851853, 11.862962962962964, 3, 11.751851851851853), Block.box(4.862962962962963, 2, 9.751851851851853, 5.862962962962963, 4, 10.751851851851853), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS), IBooleanFunction.LEGS),
-        Block.box(3.862962962962963, 7, 3.7518518518518533, 11.862962962962964, 8, 11.751851851851853),
-        Block.box(4.862962962962963, 8, 8.451851851851853, 5.862962962962963, 12, 9.451851851851853)
-        ).reduce((v1, v2) -> {return VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR);});;
-    private static final VoxelShape SHAPE_S = ;
-    private static final VoxelShape SHAPE_W = ;
-    public Crucible(Properties p_i48440_1_) {
+        Block.box(1, 0, 15, 2, 4, 16),
+        Block.box(1, 0, 0, 2, 4, 1),
+        Block.box(14, 0, 15, 15, 4, 16),
+        Block.box(15, 0, 14, 16, 4, 15),
+        Block.box(0, 0, 14, 1, 4, 15),
+        Block.box(14, 0, 0, 15, 4, 1),
+        Block.box(15, 0, 1, 16, 4, 2),
+        Block.box(0, 0, 1, 1, 4, 2),
+        Block.box(1, 2, 1, 15, 3, 15),
+        Block.box(1, 3, 14, 15, 16, 15),
+        Block.box(1, 3, 1, 15, 16, 2),
+        Block.box(14, 3, 2, 15, 16, 14),
+        Block.box(1, 3, 2, 2, 16, 14),
+        Block.box(15, 0, 0, 16, 2, 1),
+        Block.box(15, 0, 15, 16, 2, 16),
+        Block.box(0, 0, 0, 1, 2, 1),
+        Block.box(0, 0, 15, 1, 2, 16)
+        ).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();;
+    private static final VoxelShape SHAPE_S = Stream.of(
+        Block.box(0, 0, 1, 1, 4, 2),
+        Block.box(15, 0, 1, 16, 4, 2),
+        Block.box(0, 0, 14, 1, 4, 15),
+        Block.box(1, 0, 15, 2, 4, 16),
+        Block.box(1, 0, 0, 2, 4, 1),
+        Block.box(15, 0, 14, 16, 4, 15),
+        Block.box(14, 0, 15, 15, 4, 16),
+        Block.box(14, 0, 0, 15, 4, 1),
+        Block.box(1, 2, 1, 15, 3, 15),
+        Block.box(1, 3, 1, 2, 16, 15),
+        Block.box(14, 3, 1, 15, 16, 15),
+        Block.box(2, 3, 14, 14, 16, 15),
+        Block.box(2, 3, 1, 14, 16, 2),
+        Block.box(15, 0, 15, 16, 2, 16),
+        Block.box(0, 0, 15, 1, 2, 16),
+        Block.box(15, 0, 0, 16, 2, 1),
+        Block.box(0, 0, 0, 1, 2, 1)
+        ).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();;
+    private static final VoxelShape SHAPE_W = Stream.of(
+        Block.box(14, 0, 0, 15, 4, 1),
+        Block.box(14, 0, 15, 15, 4, 16),
+        Block.box(1, 0, 0, 2, 4, 1),
+        Block.box(0, 0, 1, 1, 4, 2),
+        Block.box(15, 0, 1, 16, 4, 2),
+        Block.box(1, 0, 15, 2, 4, 16),
+        Block.box(0, 0, 14, 1, 4, 15),
+        Block.box(15, 0, 14, 16, 4, 15),
+        Block.box(1, 2, 1, 15, 3, 15),
+        Block.box(1, 3, 1, 15, 16, 2),
+        Block.box(1, 3, 14, 15, 16, 15),
+        Block.box(1, 3, 2, 2, 16, 14),
+        Block.box(14, 3, 2, 15, 16, 14),
+        Block.box(0, 0, 15, 1, 2, 16),
+        Block.box(0, 0, 0, 1, 2, 1),
+        Block.box(15, 0, 15, 16, 2, 16),
+        Block.box(15, 0, 0, 16, 2, 1)
+        ).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();;
+    
+    public Crucible() {
         super(Properties.of(Material.METAL).sound(SoundType.METAL));
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
@@ -62,5 +124,21 @@ public class Crucible extends Block {
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        switch(state.getValue(FACING)) {
+            case EAST:
+                return SHAPE_E;
+            case NORTH:
+                return SHAPE_N;
+            case SOUTH:
+                return SHAPE_S;
+            case WEST:
+                return SHAPE_W;
+            default:
+                return SHAPE_N;
+        }
     }
 }

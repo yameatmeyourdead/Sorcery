@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.util.ResourceLocation;
 
-public class Sigil {
+public class Sigil extends net.minecraftforge.registries.ForgeRegistryEntry<Sigil> {
     private String name;
     private int color;
     @Nullable

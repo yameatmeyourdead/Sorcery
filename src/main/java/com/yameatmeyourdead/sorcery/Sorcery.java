@@ -1,6 +1,7 @@
 package com.yameatmeyourdead.sorcery;
 
 import com.yameatmeyourdead.sorcery.blocks.FirstBlock;
+import com.yameatmeyourdead.sorcery.pseudoitem.Sigil;
 import com.yameatmeyourdead.sorcery.setup.Registration;
 
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +13,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,8 +26,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.IForgeRegistry;
-
 
 @Mod(Sorcery.MODID)
 @Mod.EventBusSubscriber(modid = Sorcery.MODID, bus = Bus.MOD)
@@ -41,7 +41,7 @@ public class Sorcery
         modEventBus.addListener(this::doClientStuff);
         
         // Register mod objects
-        Registration.init();
+        Registration.init(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

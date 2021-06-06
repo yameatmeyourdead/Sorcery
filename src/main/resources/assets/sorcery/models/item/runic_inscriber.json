@@ -1,0 +1,24 @@
+{
+    "parent": "item/handheld",
+    "display": {
+        "firstperson_righthand": {
+            "rotation": [ 75, -90, 0 ],
+            "translation": [ 1, 2, 0 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 75, 90, 0 ],
+            "translation": [ 1, 2, 0 ]
+        },
+        "thirdperson_righthand": {
+            "rotation": [ 75, -90, 0 ],
+            "translation": [ 1, 2, 3 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 75, 90, 0 ],
+            "translation": [ 1, 2, 3 ]
+        }
+    },
+    "textures": {
+        "layer0": "sorcery:items/runic_inscriber"
+    }
+}
