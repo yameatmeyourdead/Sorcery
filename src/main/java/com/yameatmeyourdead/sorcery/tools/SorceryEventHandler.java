@@ -24,6 +24,8 @@ public class SorceryEventHandler {
         ItemStack item = event.getEntityItem().getItem();
 
         for (IRecipe<?> recipe : Registration.getRecipes(Registration.SORCERERS_TABLE_RECIPE, world).values()) {
+            if(recipe == null)
+                continue;
             final SorcerersTableRecipe STR = (SorcerersTableRecipe) recipe;
             if(STR.isValid(item)) {
                 ItemHandlerHelper.giveItemToPlayer(player, recipe.getResultItem().copy());

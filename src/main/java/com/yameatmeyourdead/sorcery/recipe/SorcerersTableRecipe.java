@@ -100,7 +100,7 @@ public class SorcerersTableRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return this.SERIALIZER;
+        return SERIALIZER;
     }
 
     @Override
