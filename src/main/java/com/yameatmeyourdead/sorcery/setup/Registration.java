@@ -96,8 +96,9 @@ public class Registration {
     }
     
     // Access transform recipe manager recipe map and get recipes that match type
-    public static <C extends IInventory, T extends IRecipe<C>> Map<ResourceLocation, IRecipe<C>> getRecipes(IRecipeType<T> type, World world) {
-        return ((AccessorRecipeManager) world.getRecipeManager()).sorcery_getRecipes(type);
+    public static Map<ResourceLocation, IRecipe<?>> getRecipes(IRecipeType<?> type, World world) {
+        final Map<IRecipeType<?>, Map<ResourceLocation, IRecipe<?>>> recipes = ObfuscationReflectionHelper.getPrivateValue(RecipeManager.class, world.getRecipeManager(), "recipes");
+        return recipes.get(type);
     }
 
     // Create Block Items
