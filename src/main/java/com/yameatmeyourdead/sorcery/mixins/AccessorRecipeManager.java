@@ -1,3 +1,7 @@
+/**
+ * This code was yoiked from Vazkii's Botania
+ * Link to github -> https://github.com/Vazkii/Botania
+ */
 package com.yameatmeyourdead.sorcery.mixins;
 
 import net.minecraft.inventory.IInventory;
