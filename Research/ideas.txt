@@ -11,3 +11,8 @@ crystallized demon essence
     demon essence liquid???
 parry this you fucking casual
     - boom boom
+
+arcane circles
+    - drawn in world at first -> magic dust item
+    - progress to have multiblock structure for basic recipes -> arcane stone
+    - advanced recipes require drawn and multiblock (bigger??)

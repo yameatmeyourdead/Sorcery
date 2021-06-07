@@ -2,23 +2,21 @@ package com.yameatmeyourdead.sorcery.setup;
 
 import static com.yameatmeyourdead.sorcery.Sorcery.MODID;
 
-import java.util.Collection;
 import java.util.Map;
 
 import com.yameatmeyourdead.sorcery.Sorcery;
 import com.yameatmeyourdead.sorcery.blocks.*;
+import com.yameatmeyourdead.sorcery.items.ArcaneDust;
 import com.yameatmeyourdead.sorcery.items.RunicInscriber;
 import com.yameatmeyourdead.sorcery.items.Signomicon;
-import com.yameatmeyourdead.sorcery.mixins.AccessorRecipeManager;
 import com.yameatmeyourdead.sorcery.pseudoitem.Sigil;
+import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipeType;
+import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipe;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipe;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipeType;
 
-import org.spongepowered.asm.launch.platform.container.ContainerHandleModLauncher.Resource;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -69,6 +67,7 @@ public class Registration {
     // Register Items
     public static final RegistryObject<Signomicon> SIGNOMICON = ITEMS.register("signomicon", Signomicon::new);
     public static final RegistryObject<RunicInscriber> RUNIC_INSCRIBER = ITEMS.register("runic_inscriber", RunicInscriber::new);
+    public static final RegistryObject<ArcaneDust> ARCANE_DUST = ITEMS.register("arcane_dust", ArcaneDust::new);
 
     // Register Tiles
 
@@ -79,14 +78,18 @@ public class Registration {
     // Register Dimensions (changed)
 
     // Create Recipe Types
+    // public static final IRecipeType<ExampleRecipe> EXAMPLE_RECIPE = new ExampleRecipeType();
     public static final IRecipeType<SorcerersTableRecipe> SORCERERS_TABLE_RECIPE = new SorcerersTableRecipeType();
+    public static final IRecipeType<ArcaneCircleRecipe> ARCANE_CIRCLE_RECIPE = new ArcaneCircleRecipeType();
 
     // Register Sigils (wowee thats a lot)
     public static final RegistryObject<Sigil> AIR_SIGIL = SIGILS.register("test", () -> Sigil.AIR);
 
     // register recipes
     public static void registerRecipes(Register<IRecipeSerializer<?>> event) {
+        // registerRecipe(event, EXAMPLE_RECIPE, ExampleRecipe.SERIALIZER);
         registerRecipe(event, SORCERERS_TABLE_RECIPE, SorcerersTableRecipe.SERIALIZER);
+        registerRecipe(event, ARCANE_CIRCLE_RECIPE, ArcaneCircleRecipe.SERIALIZER);
     }
 
     // helper method for registering recipes

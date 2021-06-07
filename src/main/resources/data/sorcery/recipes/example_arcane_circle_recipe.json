@@ -1,0 +1,15 @@
+{
+	"type": "sorcery:arcane_circle_recipe",
+	"ingredients": [
+		{"item": "minecraft:feather"},
+        {"item": "minecraft:ink_sac"},
+        {"item": "minecraft:glass_bottle"},
+        {"item": "sorcery:arcane_dust"}
+    ],
+	"outputs": [
+		{"item": "minecraft:diamond",
+		"count": 3}
+    ],
+    "level": 1,
+    "instability": 0.25
+}
