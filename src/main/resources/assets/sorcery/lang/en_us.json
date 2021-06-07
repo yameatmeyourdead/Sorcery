@@ -4,5 +4,7 @@
 
     "block.sorcery.crucible": "Crucible",
 
-    "itemGroup.sorcery": "Sorcery"
+    "itemGroup.sorcery": "Sorcery",
+
+    "category.sorcery.sorcerers_table_recipe": "Sorcerer's Table"
 }

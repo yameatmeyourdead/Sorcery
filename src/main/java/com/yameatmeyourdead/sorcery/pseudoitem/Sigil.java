@@ -123,7 +123,7 @@ public class Sigil extends net.minecraftforge.registries.ForgeRegistryEntry<Sigi
     public static final Sigil DUKE_VEPAR = new Sigil("duke_vepar", 0xffff73, "e");
     public static final Sigil MARQUIS_SABNOCK = new Sigil("marquis_sabnock", 0xffff73, "e");
     public static final Sigil MARQUIS_SHAX = new Sigil("marquis_shax", 0xffff73, "e");
-    public static final Sigil KING_VINÉ = new Sigil("king/count_vine", 0xffff73, "e");
+    public static final Sigil KING_VINE = new Sigil("king/count_vine", 0xffff73, "e");
     public static final Sigil COUNT_BIFRONS = new Sigil("count_bifrons", 0xffff73, "e");
     public static final Sigil DUKE_VUAL = new Sigil("duke_vual", 0xffff73, "e");
     public static final Sigil PRESIDENT_HAAGENTI = new Sigil("president_haagenti", 0xffff73, "e");

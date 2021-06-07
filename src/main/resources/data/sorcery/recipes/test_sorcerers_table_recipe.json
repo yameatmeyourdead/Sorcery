@@ -1,0 +1,10 @@
+{
+    "type": "sorcery:sorcerers_table_recipe",
+    "input": {
+        "item": "sorcery:signomicon"
+    },
+    "output": {
+        "item": "minecraft:diamond",
+        "count": 1
+    }
+}
