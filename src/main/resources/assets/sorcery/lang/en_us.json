@@ -1,10 +1,13 @@
 {
     "item.sorcery.signomicon": "Signomicon",
     "item.sorcery.runic_inscriber": "Runic Inscriber",
+    "item.sorcery.arcane_dust": "Arcane Dust",
 
     "block.sorcery.crucible": "Crucible",
+    "block.sorcery.arcane_circle": "Arcane Circle",
 
     "itemGroup.sorcery": "Sorcery",
 
-    "category.sorcery.sorcerers_table_recipe": "Sorcerer's Table"
+    "category.sorcery.sorcerers_table_recipe": "Sorcerer's Table",
+    "category.sorcery.arcane_circle_recipe": "Arcane Circle"
 }

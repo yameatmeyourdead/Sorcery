@@ -1,0 +1,25 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "sorcery:blocks/arcane_circle_top",
+		"1": "sorcery:blocks/arcane_circle_bottom",
+		"particle": "sorcery:blocks/arcane_circle_top"
+	},
+	"elements": [
+		{
+			"from": [-8, 0, -8],
+			"to": [24, 1, 24],
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "VoxelShapes",
+			"origin": [0, 0, 0],
+			"children": [0]
+		}
+	]
+}

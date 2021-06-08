@@ -14,6 +14,7 @@ import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipeType;
 import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipe;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipe;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipeType;
+import com.yameatmeyourdead.sorcery.te.ArcaneCircleTileEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
@@ -63,6 +64,7 @@ public class Registration {
 
     // Register Blocks
     public static final RegistryObject<Crucible> CRUCIBLE = BLOCKS.register("crucible", Crucible::new);
+    public static final RegistryObject<ArcaneCircle> ARCANE_CIRCLE = BLOCKS.register("arcane_circle", ArcaneCircle::new);
 
     // Register Items
     public static final RegistryObject<Signomicon> SIGNOMICON = ITEMS.register("signomicon", Signomicon::new);
@@ -70,7 +72,8 @@ public class Registration {
     public static final RegistryObject<ArcaneDust> ARCANE_DUST = ITEMS.register("arcane_dust", ArcaneDust::new);
 
     // Register Tiles
-
+    public static final RegistryObject<TileEntityType<ArcaneCircleTileEntity>> ARCANE_CIRCLE_ENTITY_TYPE = TILES.register("arcane_circle", () -> TileEntityType.Builder.of(ArcaneCircleTileEntity::new, ARCANE_CIRCLE.get()).build(null));
+    
     // Register Containers
 
     // Register Entities
@@ -110,6 +113,12 @@ public class Registration {
     	Registration.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
             event.getRegistry().register(new BlockItem(block, new Item.Properties().tab(Sorcery.ITEM_GROUP)).setRegistryName(block.getRegistryName()));
         });
+        
+        // for(RegistryObject<Block> block : Registration.BLOCKS.getEntries()) {
+        //     for(RegistryObject<Item> item : Registration.ITEMS.getEntries()) {
+        //         if(item.get().getRegistryName() == block.get().getRegistryName()) continue;
+        //     }
+        // }
     }
 
     // Create custom deferred registers here

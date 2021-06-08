@@ -13,7 +13,9 @@ import com.yameatmeyourdead.sorcery.Sorcery;
 import com.yameatmeyourdead.sorcery.setup.Registration;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.Stitcher.Slot;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -46,7 +48,29 @@ public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {
 
     @Override
 	public boolean matches(IInventory inv, World worldIn) {
-		return false;
+        // Copy the components array (we will be modifying)
+        List<Ingredient> missingItems = new ArrayList<>(components);
+        // was an item removed
+        boolean removed = false;
+        // loop through container's slots
+        for (int i = 0; i < inv.getContainerSize(); i++) {
+            removed = false;
+            // get each item
+            ItemStack input = inv.getItem(i);
+            if(input.isEmpty()) continue; // don't get empty air slots
+            for(int j = 0; j < missingItems.size(); j++) { // find the appropriate ingredient in missing items
+                if(missingItems.get(j).test(input)) {
+                    missingItems.remove(j); // remove it from further testing slight optimization still O(n^2)
+                    removed = true;
+                    break;
+                }
+            }
+            // if item was in arcane circle but is not a part of recipe, recipe obv doesnt work
+            if(!removed)
+                return false;
+        }
+
+        return missingItems.isEmpty();
 	}
 	
 	@Override
@@ -65,7 +89,11 @@ public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {
 	}
 
     public ItemStack[] getResultItems() {
-        return (ItemStack[]) outputs.toArray();
+        ItemStack[] toReturn = new ItemStack[outputs.size()];
+        for(int i = 0; i < outputs.size(); i++) {
+            toReturn[i] = outputs.get(i);
+        }
+        return toReturn;
     }
 	
 	@Override
@@ -94,17 +122,6 @@ public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {
 
     public float getInstability() {
         return this.instability;
-    }
-
-    // TODO: FIX THIS 
-    // This kinda expensive tho
-    public boolean isValid(List<ItemStack> items) {
-        List<Ingredient> missingIngredients = new ArrayList<>(components);
-        for (ItemStack item : items) {
-            missingIngredients.remove((Object) item);
-        }
-
-        return missingIngredients.size() == 0;
     }
 	
 	@Override
