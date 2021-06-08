@@ -5,6 +5,8 @@ import com.yameatmeyourdead.sorcery.setup.Registration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -39,14 +41,17 @@ public class Sorcery
         MinecraftForge.EVENT_BUS.register(this);
     }
     
-    private void setup(final FMLCommonSetupEvent event)
+    @SubscribeEvent
+    public void setup(final FMLCommonSetupEvent event)
     {
     	
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) 
+    @SubscribeEvent
+    public void doClientStuff(final FMLClientSetupEvent event) 
     {
-        
+        RenderTypeLookup.setRenderLayer(Registration.ARCANE_CIRCLE.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(Registration.SORCERERS_TABLE.get(), RenderType.translucent());
     }
 
     @SubscribeEvent

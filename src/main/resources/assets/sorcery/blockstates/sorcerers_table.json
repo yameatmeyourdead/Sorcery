@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "sorcery:block/sorcerers_table" },
+        "facing=east": { "model": "sorcery:block/sorcerers_table", "y": 90 },
+        "facing=south": { "model": "sorcery:block/sorcerers_table", "y": 180 },
+        "facing=west": { "model": "sorcery:block/sorcerers_table", "y": 270 }
+    }
+}

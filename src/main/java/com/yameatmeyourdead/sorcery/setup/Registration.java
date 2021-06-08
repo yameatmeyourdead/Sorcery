@@ -65,6 +65,7 @@ public class Registration {
     // Register Blocks
     public static final RegistryObject<Crucible> CRUCIBLE = BLOCKS.register("crucible", Crucible::new);
     public static final RegistryObject<ArcaneCircle> ARCANE_CIRCLE = BLOCKS.register("arcane_circle", ArcaneCircle::new);
+    public static final RegistryObject<SorcerersTable> SORCERERS_TABLE = BLOCKS.register("sorcerers_table", SorcerersTable::new);
 
     // Register Items
     public static final RegistryObject<Signomicon> SIGNOMICON = ITEMS.register("signomicon", Signomicon::new);
