@@ -16,10 +16,10 @@ public class ModelBaseArcaneCircle extends Model {
         texHeight = 160;
 
         circle = new ModelRenderer(this);
-        
+        circle.setTexSize(160, 160);
         circle.texOffs(0, 0);
         circle.addBox(-8, 0, -8, 24, 1, 24);
-        circle.setPos(0, 24, 0);
+        circle.setPos(-8, 24, -8);
     }
 
     @Override
