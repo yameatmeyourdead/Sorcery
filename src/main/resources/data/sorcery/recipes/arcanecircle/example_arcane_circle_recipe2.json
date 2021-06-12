@@ -9,6 +9,7 @@
 		{"item": "minecraft:dirt",
 		"count": 3}
     ],
+    "texture": "arcane_circle_top.png",
     "level": 1,
     "instability": 0.25
 }

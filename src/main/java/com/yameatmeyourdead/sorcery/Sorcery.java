@@ -1,5 +1,6 @@
 package com.yameatmeyourdead.sorcery;
 
+import com.yameatmeyourdead.sorcery.client.render.arcanecircles.ArcaneCircleRenderer;
 import com.yameatmeyourdead.sorcery.setup.Registration;
 
 import org.apache.logging.log4j.LogManager;
@@ -10,9 +11,11 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -51,6 +54,7 @@ public class Sorcery
     public void doClientStuff(final FMLClientSetupEvent event) 
     {
         RenderTypeLookup.setRenderLayer(Registration.ARCANE_CIRCLE.get(), RenderType.cutout());
+        ClientRegistry.bindTileEntityRenderer(Registration.ARCANE_CIRCLE_ENTITY_TYPE.get(), ArcaneCircleRenderer::new);
         RenderTypeLookup.setRenderLayer(Registration.SORCERERS_TABLE.get(), RenderType.translucent());
     }
 

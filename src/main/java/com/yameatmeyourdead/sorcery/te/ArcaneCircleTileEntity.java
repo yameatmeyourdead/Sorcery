@@ -23,6 +23,10 @@ public class ArcaneCircleTileEntity extends TileInventory implements ITickableTi
         this(Registration.ARCANE_CIRCLE_ENTITY_TYPE.get());
     }
 
+    public Direction getRotation() {
+        return rotation;
+    }
+
     @Override
     public void tick() {
         for (IRecipe<?> recipe : Registration.getRecipes(Registration.ARCANE_CIRCLE_RECIPE, getLevel()).values()) {

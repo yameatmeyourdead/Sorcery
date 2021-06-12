@@ -75,6 +75,7 @@ public class Registration {
     // Register Tiles
     public static final RegistryObject<TileEntityType<ArcaneCircleTileEntity>> ARCANE_CIRCLE_ENTITY_TYPE = TILES.register("arcane_circle", () -> TileEntityType.Builder.of(ArcaneCircleTileEntity::new, ARCANE_CIRCLE.get()).build(null));
     
+    
     // Register Containers
 
     // Register Entities

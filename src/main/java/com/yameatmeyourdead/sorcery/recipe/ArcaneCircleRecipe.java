@@ -36,10 +36,12 @@ public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {
     private NonNullList<Ingredient> components = NonNullList.create();
     private NonNullList<ItemStack> outputs = NonNullList.create();
     private final ResourceLocation id;
+    private final ResourceLocation texture;
     private int level;
     private final float instability;
-    public ArcaneCircleRecipe(ResourceLocation id, NonNullList<Ingredient> components, NonNullList<ItemStack> outputs, int level, float instability) {
+    public ArcaneCircleRecipe(ResourceLocation id, ResourceLocation texture, NonNullList<Ingredient> components, NonNullList<ItemStack> outputs, int level, float instability) {
         this.id = id;
+        this.texture = texture;
         this.components = components;
         this.outputs = outputs;
         this.level = level;
@@ -72,12 +74,36 @@ public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {
 
         return missingItems.isEmpty();
 	}
+
+    public boolean matches(ItemStack[] in) {
+        // check if inputs match
+        List<Ingredient> missingItems = new ArrayList<>(components);
+        boolean removed = false;
+        for(ItemStack item : in) {
+            removed = false;
+            for(int i = 0; i < missingItems.size(); i++) {
+                if(missingItems.get(i).test(item)){
+                    missingItems.remove(i);
+                    removed = true;
+                    break;
+                }
+            }
+            if(!removed)
+                return false;
+        }
+
+        return true;
+    }
 	
 	@Override
 	public ItemStack assemble(IInventory inv) {
 		return this.outputs.get(0).copy();
 	}
 	
+    public ResourceLocation getTexture() {
+        return this.texture;
+    }
+
     /**
      * Use {@link #getResultItems getResultItems()} instead <p>
      * @return Dirt Item Stack in case you use this >:( you naughty naughty
@@ -155,9 +181,10 @@ public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {
             }
 
             // parse level and instability
+            final ResourceLocation texture = new ResourceLocation("sorcery", "textures/arcanecircles/" + JSONUtils.getAsString(json, "texture"));
             final int level = JSONUtils.getAsInt(json, "level");
             final float instability = JSONUtils.getAsFloat(json, "instability");
-			return new ArcaneCircleRecipe(recipeId, ingredients, outputs, level, instability);
+			return new ArcaneCircleRecipe(recipeId, texture, ingredients, outputs, level, instability);
 		}
 
 		@Override
@@ -173,9 +200,10 @@ public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {
             for (int i = 0; i < len; i++) {
                 outputs.add(buffer.readItem());
             }
+            final ResourceLocation texture = new ResourceLocation("sorcery", "textures/arcanecircles/" + buffer.readUtf());
             final int level = buffer.readInt();
             final float instability = buffer.readFloat();
-			return new ArcaneCircleRecipe(recipeId, ingredients, outputs, level, instability);
+			return new ArcaneCircleRecipe(recipeId, texture, ingredients, outputs, level, instability);
 		}
 
 		@Override

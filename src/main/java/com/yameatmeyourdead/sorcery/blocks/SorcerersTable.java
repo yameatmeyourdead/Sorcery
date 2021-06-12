@@ -24,7 +24,8 @@ public class SorcerersTable extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     protected static final VoxelShape SHAPE = Stream.of(
-        Block.box(0, 0, 0, 16, 16, 16)
+        Block.box(0, 0, 0, 16, 16, 16),
+        Block.box(2, 0, 0, 14, 11, 16)
         // Block.box(0, 0, 0, 2, 14, 1),
         // Block.box(0, 0, 15, 2, 14, 16),
         // Block.box(14, 0, 0, 16, 14, 1),
@@ -41,7 +42,7 @@ public class SorcerersTable extends Block {
         // Block.box(2, 11, 0, 14, 14, 1),
         // Block.box(2, 11, 15, 14, 14, 16),
         // Block.box(0, 11, 1, 16, 12, 15)
-        ).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();
+        ).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.ONLY_FIRST);}).get();
 
     public SorcerersTable() {
         super(Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2f).noOcclusion());

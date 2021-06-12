@@ -59,6 +59,10 @@ public class TileInventory extends TileEntity implements IInventory {
         return inventory.get(slotIndex);
     }
 
+    public ItemStack[] getInventory() {
+        return this.inventory.toArray(new ItemStack[inventory.size()]);
+    }
+
     @Override
     public ItemStack removeItem(int index, int count) {
         if(!getItem(index).isEmpty()){
