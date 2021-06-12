@@ -18,7 +18,7 @@ public class ModelBaseArcaneCircle extends Model {
         circle = new ModelRenderer(this);
         
         circle.texOffs(0, 0);
-        circle.addBox(0, 0, 0, 16, 0, 16);
+        circle.addBox(-8, 0, -8, 24, 1, 24);
         circle.setPos(0, 24, 0);
     }
 

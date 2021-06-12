@@ -53,7 +53,6 @@ public class Sorcery
     @SubscribeEvent
     public void doClientStuff(final FMLClientSetupEvent event)
     {
-        RenderTypeLookup.setRenderLayer(Registration.ARCANE_CIRCLE.get(), RenderType.cutout());
         ClientRegistry.bindTileEntityRenderer(Registration.ARCANE_CIRCLE_ENTITY_TYPE.get(), ArcaneCircleRenderer::new);
         RenderTypeLookup.setRenderLayer(Registration.SORCERERS_TABLE.get(), RenderType.translucent());
     }

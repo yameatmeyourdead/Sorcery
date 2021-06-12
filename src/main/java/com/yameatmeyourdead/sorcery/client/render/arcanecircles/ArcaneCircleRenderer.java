@@ -10,8 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
 
 public class ArcaneCircleRenderer extends TileEntityRenderer<ArcaneCircleTileEntity> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation("sorcery:textures/arcanecircles/arcane_circle_top.png");
-    final static ModelBaseArcaneCircle model = new ModelBaseArcaneCircle();
+    public final ResourceLocation TEXTURE = new ResourceLocation("sorcery:textures/arcanecircles/arcane_circle_top.png");
+    private final ModelBaseArcaneCircle model = new ModelBaseArcaneCircle();
 
     public ArcaneCircleRenderer(TileEntityRendererDispatcher tileEntityRendererDispatcher) {
         super(tileEntityRendererDispatcher);
