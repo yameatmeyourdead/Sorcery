@@ -11,15 +11,13 @@ public class ModelBaseArcaneCircle extends Model {
     public ModelRenderer circle;
 
     public ModelBaseArcaneCircle() {
-        super(RenderType::entityTranslucent);
-        texWidth = 160;
-        texHeight = 160;
+        super(RenderType::entityCutout);
 
         circle = new ModelRenderer(this);
-        circle.setTexSize(160, 160);
-        circle.texOffs(0, 0);
-        circle.addBox(-8, 0, -8, 24, 1, 24);
-        circle.setPos(-8, 24, -8);
+        circle.setPos(0, 24, 0);
+        circle.setTexSize(32, 32);
+        circle.addBox(0, 1, 0, 32, 1, 32);
+        
     }
 
     @Override
