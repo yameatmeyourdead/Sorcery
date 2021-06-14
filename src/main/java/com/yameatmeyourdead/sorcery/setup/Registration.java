@@ -5,26 +5,27 @@ import static com.yameatmeyourdead.sorcery.Sorcery.MODID;
 import java.util.Map;
 
 import com.yameatmeyourdead.sorcery.Sorcery;
-import com.yameatmeyourdead.sorcery.blocks.*;
-import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearch;
-import com.yameatmeyourdead.sorcery.capabilities.CapabilityProviderResearch;
+import com.yameatmeyourdead.sorcery.blocks.ArcaneCircle;
+import com.yameatmeyourdead.sorcery.blocks.Crucible;
+import com.yameatmeyourdead.sorcery.blocks.SorcerersTable;
+import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearcher;
 import com.yameatmeyourdead.sorcery.items.ArcaneDust;
 import com.yameatmeyourdead.sorcery.items.Parchment;
+import com.yameatmeyourdead.sorcery.items.ResearchNotes;
 import com.yameatmeyourdead.sorcery.items.RollOfParchment;
 import com.yameatmeyourdead.sorcery.items.RunicInscriber;
 import com.yameatmeyourdead.sorcery.items.Signomicon;
 import com.yameatmeyourdead.sorcery.pseudoitem.Sigil;
-import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipeType;
 import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipe;
+import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipeType;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipe;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipeType;
 import com.yameatmeyourdead.sorcery.research.ResearchBase;
+import com.yameatmeyourdead.sorcery.research.ResearchIntro;
 import com.yameatmeyourdead.sorcery.te.ArcaneCircleTileEntity;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -36,16 +37,14 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryBuilder;
@@ -60,6 +59,7 @@ public class Registration {
     // private static final DeferredRegister<Block> DIMENSIONS = DeferredRegister.create(ForgeRegistries.MOD_DIMENSIONS, MODID);
     
     private static final DeferredRegister<Sigil> SIGILS = DeferredRegister.create(Sigil.class, MODID);
+    private static final DeferredRegister<ResearchBase> ALL_VALID_RESEARCH = DeferredRegister.create(ResearchBase.class, MODID);
 
     public static void init(final IEventBus bussy) {
         BLOCKS.register(bussy);
@@ -82,10 +82,10 @@ public class Registration {
     public static final RegistryObject<ArcaneDust> ARCANE_DUST = ITEMS.register("arcane_dust", ArcaneDust::new);
     public static final RegistryObject<RollOfParchment> PARCHMENT_ROLL = ITEMS.register("parchment_roll", RollOfParchment::new);
     public static final RegistryObject<Parchment> PARCHMENT = ITEMS.register("parchment", Parchment::new);
+    public static final RegistryObject<ResearchNotes> RESEARCH_NOTES = ITEMS.register("research_notes", ResearchNotes::new);
 
     // Register Tiles
     public static final RegistryObject<TileEntityType<ArcaneCircleTileEntity>> ARCANE_CIRCLE_ENTITY_TYPE = TILES.register("arcane_circle", () -> TileEntityType.Builder.of(ArcaneCircleTileEntity::new, ARCANE_CIRCLE.get()).build(null));
-    
     
     // Register Containers
 
@@ -95,7 +95,7 @@ public class Registration {
 
     // Register Capabilities
     public static void registerCapabilities() {
-        CapabilityPlayerResearch.register();
+        CapabilityPlayerResearcher.register();
     }
 
     // Create Recipe Types
@@ -107,6 +107,7 @@ public class Registration {
     public static final RegistryObject<Sigil> AIR_SIGIL = SIGILS.register("test", () -> Sigil.AIR);
 
     // Register Researches
+    public static final RegistryObject<ResearchBase> RESEARCH_INTRO = ALL_VALID_RESEARCH.register("intro_to_sorcery", ResearchIntro::new);
 
     // register recipes
     public static void registerRecipes(Register<IRecipeSerializer<?>> event) {

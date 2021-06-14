@@ -1,10 +1,7 @@
 package com.yameatmeyourdead.sorcery.recipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map.Entry;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -12,10 +9,7 @@ import com.google.gson.JsonObject;
 import com.yameatmeyourdead.sorcery.Sorcery;
 import com.yameatmeyourdead.sorcery.setup.Registration;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.Stitcher.Slot;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -27,7 +21,6 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ArcaneCircleRecipe implements IArcaneCircleRecipe, ISorceryRecipe {

@@ -1,6 +1,5 @@
 package com.yameatmeyourdead.sorcery.capabilities;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,23 +9,24 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class Research {
-    private NonNullList<String> research;
+public class Researcher {
+    private NonNullList<String> researchCompleted;
     private int insanity; 
 
-    public Research() {
-        this.research = NonNullList.create();
+    public Researcher() {
+        this.researchCompleted = NonNullList.create();
         this.insanity = 0;
     }
 
-    public String getResearch() {return String.join(";", this.research);}
+    public String getResearch() {return String.join(";", this.researchCompleted);}
     public NonNullList<String> getProtectedResearch() {
         NonNullList<String> cpy = NonNullList.create();
-        this.research.forEach(element -> cpy.add(element));
+        this.researchCompleted.forEach(element -> cpy.add(element));
         return cpy;
     }
-    public void setResearch(NonNullList<String> research) {this.research = research;}
-    public void addResearch(String researchName) {this.research.add(researchName);}
+    public void setResearchCompleted(NonNullList<String> researchCompleted) {this.researchCompleted = researchCompleted;}
+    public void addResearch(String researchName) {this.researchCompleted.add(researchName);
+    }
 
     public int getInsanity() {return this.insanity;}
     public void setInsanity(int insanity) {this.insanity = insanity;}
@@ -34,23 +34,23 @@ public class Research {
     public void decreaseInsanity(int decr) {this.insanity -= decr;}
 
     public void setData(NonNullList<String> _research, int _insanity) {
-        this.research = NonNullList.create();
-        _research.forEach(e -> this.research.add(e));
+        this.researchCompleted = NonNullList.create();
+        _research.forEach(e -> this.researchCompleted.add(e));
         this.insanity = _insanity;
     }
 
-    public static class ResearchStorage implements Capability.IStorage<Research> {
+    public static class ResearchStorage implements Capability.IStorage<Researcher> {
 
         @Override
-        public INBT writeNBT(Capability<Research> capability, Research instance, Direction side) {
+        public INBT writeNBT(Capability<Researcher> capability, Researcher instance, Direction side) {
             CompoundNBT tags = new CompoundNBT();
             tags.putInt("insanity", instance.insanity);
-            tags.putString("research", String.join(";", instance.research));
+            tags.putString("research", String.join(";", instance.researchCompleted));
             return tags;
         }
 
         @Override
-        public void readNBT(Capability<Research> capability, Research instance, Direction side, INBT tag) {
+        public void readNBT(Capability<Researcher> capability, Researcher instance, Direction side, INBT tag) {
             CompoundNBT tags = (CompoundNBT) tag;
             if(tags.contains("insanity")) {
                 instance.insanity = tags.getInt("insanity");
@@ -60,12 +60,12 @@ public class Research {
                 List<String> toAdd = Arrays.asList(tags.getString("research").split(";"));
                 NonNullList<String> toReturn = NonNullList.create();
                 toAdd.forEach(element -> toReturn.add(element));
-                instance.research = toReturn;
+                instance.researchCompleted = toReturn;
             }
         }
     }
 
-    public static Research createDefaultInstance(){
-        return new Research();
+    public static Researcher createDefaultInstance(){
+        return new Researcher();
     }
 }

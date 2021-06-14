@@ -1,9 +1,9 @@
 package com.yameatmeyourdead.sorcery.tools;
 
 import com.yameatmeyourdead.sorcery.Sorcery;
-import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearch;
-import com.yameatmeyourdead.sorcery.capabilities.CapabilityProviderResearch;
-import com.yameatmeyourdead.sorcery.capabilities.Research;
+import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearcher;
+import com.yameatmeyourdead.sorcery.capabilities.CapabilityProviderResearcher;
+import com.yameatmeyourdead.sorcery.capabilities.Researcher;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +18,7 @@ public class EventHandler {
     public static void attachCapabilityToEntity(AttachCapabilitiesEvent<Entity> event) {
         if(event.getObject() instanceof PlayerEntity) {
             Sorcery.LOGGER.debug("POOPMODE");
-            event.addCapability(new ResourceLocation(Sorcery.MODID, "research_capability"), new CapabilityProviderResearch());
+            event.addCapability(new ResourceLocation(Sorcery.MODID, "research_capability"), new CapabilityProviderResearcher());
         }
     }
 
@@ -30,9 +30,9 @@ public class EventHandler {
         PlayerEntity newPlayer = event.getPlayer();
 
         // get capability interfaces
-        Research oldPlayerResearchInterface = oldPlayer.getCapability(CapabilityPlayerResearch.CAPABILITY_PLAYER_RESEARCH).orElse(null);
+        Researcher oldPlayerResearchInterface = oldPlayer.getCapability(CapabilityPlayerResearcher.CAPABILITY_PLAYER_RESEARCHER).orElse(null);
         if(oldPlayerResearchInterface == null) return;
-        Research newPlayerResearchInterface = newPlayer.getCapability(CapabilityPlayerResearch.CAPABILITY_PLAYER_RESEARCH).orElse(null);
+        Researcher newPlayerResearchInterface = newPlayer.getCapability(CapabilityPlayerResearcher.CAPABILITY_PLAYER_RESEARCHER).orElse(null);
         if(newPlayerResearchInterface == null) return;
 
         // copy old research data to new player

@@ -8,7 +8,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 public class ArcaneCircleTileEntity extends TileInventory implements ITickableTileEntity {
     public boolean isActive = false;

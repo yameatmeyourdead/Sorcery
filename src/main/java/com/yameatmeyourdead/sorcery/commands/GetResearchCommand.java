@@ -3,8 +3,8 @@ package com.yameatmeyourdead.sorcery.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearch;
-import com.yameatmeyourdead.sorcery.capabilities.Research;
+import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearcher;
+import com.yameatmeyourdead.sorcery.capabilities.Researcher;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -22,7 +22,7 @@ public class GetResearchCommand {
     private static int message(CommandContext<CommandSource> ctx) {
         Entity source = ctx.getSource().getEntity();
         if(source != null) {
-            Research researchInterface = ctx.getSource().getEntity().getCapability(CapabilityPlayerResearch.CAPABILITY_PLAYER_RESEARCH).orElse(null);
+            Researcher researchInterface = ctx.getSource().getEntity().getCapability(CapabilityPlayerResearcher.CAPABILITY_PLAYER_RESEARCHER).orElse(null);
             if(researchInterface == null) return 1;
             ctx.getSource().getServer().getPlayerList().broadcastMessage(new TranslationTextComponent("chat.type.announcement", ctx.getSource().getDisplayName(), new StringTextComponent(researchInterface.getResearch())), ChatType.CHAT, source.getUUID());
         }

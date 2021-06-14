@@ -9,7 +9,6 @@ import com.yameatmeyourdead.sorcery.setup.Registration;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
@@ -21,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class SorcerersTableRecipe implements IRecipe<IInventory>, ISorceryRecipe {
+public class SorcerersTableRecipe implements ISorceryRecipe {
 
 	public static final Serializer SERIALIZER = new Serializer();
 

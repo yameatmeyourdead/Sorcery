@@ -12,8 +12,8 @@ import net.minecraftforge.common.util.LazyOptional;
  * This class provides all the capabilities that Player Research needs
  * 1) CapabilityPlayerResearch -> PlayerResearchInterfaceInstance
  */
-public class CapabilityProviderResearch implements ICapabilitySerializable<INBT> {
-    private Research research = new Research();
+public class CapabilityProviderResearcher implements ICapabilitySerializable<INBT> {
+    private Researcher researcher = new Researcher();
     private final Direction NO_SPECIFIC_SIDE = null;
 
     /**
@@ -28,8 +28,8 @@ public class CapabilityProviderResearch implements ICapabilitySerializable<INBT>
     @SuppressWarnings("unchecked")
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-        if(cap == CapabilityPlayerResearch.CAPABILITY_PLAYER_RESEARCH) {
-            return (LazyOptional<T>)LazyOptional.of(() -> research);
+        if(cap == CapabilityPlayerResearcher.CAPABILITY_PLAYER_RESEARCHER) {
+            return (LazyOptional<T>)LazyOptional.of(() -> researcher);
         }
         return LazyOptional.empty();
     }
@@ -39,7 +39,7 @@ public class CapabilityProviderResearch implements ICapabilitySerializable<INBT>
      */
     @Override
     public INBT serializeNBT() {
-        return CapabilityPlayerResearch.CAPABILITY_PLAYER_RESEARCH.writeNBT(research, NO_SPECIFIC_SIDE);
+        return CapabilityPlayerResearcher.CAPABILITY_PLAYER_RESEARCHER.writeNBT(researcher, NO_SPECIFIC_SIDE);
     }
 
     /**
@@ -47,7 +47,7 @@ public class CapabilityProviderResearch implements ICapabilitySerializable<INBT>
      */
     @Override
     public void deserializeNBT(INBT nbt) {
-        CapabilityPlayerResearch.CAPABILITY_PLAYER_RESEARCH.readNBT(research, NO_SPECIFIC_SIDE, nbt);
+        CapabilityPlayerResearcher.CAPABILITY_PLAYER_RESEARCHER.readNBT(researcher, NO_SPECIFIC_SIDE, nbt);
     }
     
 }

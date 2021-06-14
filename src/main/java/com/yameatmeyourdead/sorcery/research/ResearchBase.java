@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class ResearchBase extends ForgeRegistryEntry<ResearchBase>{
+public class ResearchBase extends ForgeRegistryEntry<ResearchBase> {
     // instance variables that all researches should contain data on
     protected String name = "ResearchBaseHowDidYouGetThis";
     protected int insanity = 0;
@@ -21,10 +21,14 @@ public class ResearchBase extends ForgeRegistryEntry<ResearchBase>{
 
     // common methods
     public String toString() {
-        String prereqs = ""; 
-        for(ResearchBase element : prerequisites) {
-            prereqs += element.toString();
+        String prereqs = "";
+        if(prerequisites == null || prerequisites.size() == 0) prereqs = "NONE";
+        if(prereqs != null) {
+            for(ResearchBase element : prerequisites) {
+                prereqs += element.toString();
+            }
         }
-        return "name: " + this.name + ",insanity: " + insanity != null ? String.valueOf(insanity) : "0" + "prerequisites: {" + prereqs + "}";
+        
+        return ("name: " + this.name + ",insanity: " + String.valueOf(insanity) + "prerequisites: {" + prereqs + "}");
     }
 }

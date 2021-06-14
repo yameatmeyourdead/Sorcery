@@ -53,6 +53,7 @@ public class SorcerersTableRecipeCategory implements IRecipeCategory<SorcerersTa
         return icon;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setIngredients(SorcerersTableRecipe recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(recipe.getIngredients());
