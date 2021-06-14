@@ -4,9 +4,11 @@ import com.yameatmeyourdead.sorcery.Sorcery;
 import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipe;
 import com.yameatmeyourdead.sorcery.setup.Registration;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;

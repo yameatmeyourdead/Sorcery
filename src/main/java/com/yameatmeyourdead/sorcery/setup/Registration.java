@@ -6,7 +6,11 @@ import java.util.Map;
 
 import com.yameatmeyourdead.sorcery.Sorcery;
 import com.yameatmeyourdead.sorcery.blocks.*;
+import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearch;
+import com.yameatmeyourdead.sorcery.capabilities.CapabilityProviderResearch;
 import com.yameatmeyourdead.sorcery.items.ArcaneDust;
+import com.yameatmeyourdead.sorcery.items.Parchment;
+import com.yameatmeyourdead.sorcery.items.RollOfParchment;
 import com.yameatmeyourdead.sorcery.items.RunicInscriber;
 import com.yameatmeyourdead.sorcery.items.Signomicon;
 import com.yameatmeyourdead.sorcery.pseudoitem.Sigil;
@@ -14,10 +18,13 @@ import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipeType;
 import com.yameatmeyourdead.sorcery.recipe.ArcaneCircleRecipe;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipe;
 import com.yameatmeyourdead.sorcery.recipe.SorcerersTableRecipeType;
+import com.yameatmeyourdead.sorcery.research.ResearchBase;
 import com.yameatmeyourdead.sorcery.te.ArcaneCircleTileEntity;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -29,6 +36,8 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -71,6 +80,8 @@ public class Registration {
     public static final RegistryObject<Signomicon> SIGNOMICON = ITEMS.register("signomicon", Signomicon::new);
     public static final RegistryObject<RunicInscriber> RUNIC_INSCRIBER = ITEMS.register("runic_inscriber", RunicInscriber::new);
     public static final RegistryObject<ArcaneDust> ARCANE_DUST = ITEMS.register("arcane_dust", ArcaneDust::new);
+    public static final RegistryObject<RollOfParchment> PARCHMENT_ROLL = ITEMS.register("parchment_roll", RollOfParchment::new);
+    public static final RegistryObject<Parchment> PARCHMENT = ITEMS.register("parchment", Parchment::new);
 
     // Register Tiles
     public static final RegistryObject<TileEntityType<ArcaneCircleTileEntity>> ARCANE_CIRCLE_ENTITY_TYPE = TILES.register("arcane_circle", () -> TileEntityType.Builder.of(ArcaneCircleTileEntity::new, ARCANE_CIRCLE.get()).build(null));
@@ -82,6 +93,11 @@ public class Registration {
 
     // Register Dimensions (changed)
 
+    // Register Capabilities
+    public static void registerCapabilities() {
+        CapabilityPlayerResearch.register();
+    }
+
     // Create Recipe Types
     // public static final IRecipeType<ExampleRecipe> EXAMPLE_RECIPE = new ExampleRecipeType();
     public static final IRecipeType<SorcerersTableRecipe> SORCERERS_TABLE_RECIPE = new SorcerersTableRecipeType();
@@ -89,6 +105,8 @@ public class Registration {
 
     // Register Sigils (wowee thats a lot)
     public static final RegistryObject<Sigil> AIR_SIGIL = SIGILS.register("test", () -> Sigil.AIR);
+
+    // Register Researches
 
     // register recipes
     public static void registerRecipes(Register<IRecipeSerializer<?>> event) {
@@ -127,11 +145,17 @@ public class Registration {
     @SubscribeEvent
     public static void registerRegistries(final RegistryEvent.NewRegistry event) {
         new RegistryBuilder<Sigil>().setType(Sigil.class).setName(new ResourceLocation(MODID, "sigil_registry")).create();
+        new RegistryBuilder<ResearchBase>().setType(ResearchBase.class).setName(new ResourceLocation(MODID, "research_registry")).create();
     }
 
     // debug output on custom registry creation
     @SubscribeEvent
     public static void onSigilRegistry(final RegistryEvent.Register<Sigil> event) {
         event.getRegistry().getValues().forEach(element -> Sorcery.LOGGER.debug("Sucessfully Registered Sigil: " + element.getName()));
+    }
+
+    @SubscribeEvent
+    public static void onResearchRegistry(final RegistryEvent.Register<ResearchBase> event) {
+        event.getRegistry().getValues().forEach(element -> Sorcery.LOGGER.debug("Successfully Registered Research: " + element.getName()));
     }
 }

@@ -10,8 +10,8 @@ public class DamageSourceSorcery extends DamageSource {
     public static DamageSource magic = new DamageSourceSorcery("magic").setMagic();
     public static DamageSource obama = new DamageSourceSorcery("obama").bypassArmor().bypassInvul().bypassMagic().setMagic();
 
-    protected DamageSourceSorcery(String p_i1566_1_) {
-        super(p_i1566_1_);
+    protected DamageSourceSorcery(String msgID) {
+        super(msgID);
     }
     
     public static DamageSource causeDemonicDamage(LivingEntity source) {

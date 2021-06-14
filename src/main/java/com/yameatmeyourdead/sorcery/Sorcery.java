@@ -1,7 +1,9 @@
 package com.yameatmeyourdead.sorcery;
 
 import com.yameatmeyourdead.sorcery.client.render.arcanecircles.ArcaneCircleRenderer;
+import com.yameatmeyourdead.sorcery.commands.RegisterCommandEvent;
 import com.yameatmeyourdead.sorcery.setup.Registration;
+import com.yameatmeyourdead.sorcery.tools.EventHandler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,12 +44,14 @@ public class Sorcery
         Registration.init(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(EventHandler.class);
     }
     
     @SubscribeEvent
     public void setup(final FMLCommonSetupEvent event)
     {
-    	
+    	Registration.registerCapabilities();
+        MinecraftForge.EVENT_BUS.register(RegisterCommandEvent.class);
     }
 
     @SubscribeEvent
