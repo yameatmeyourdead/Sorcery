@@ -49,6 +49,7 @@ public class Sorcery
     @SubscribeEvent
     public void setup(final FMLCommonSetupEvent event)
     {
+        Registration.registerResearchManager();
     	Registration.registerCapabilities();
         MinecraftForge.EVENT_BUS.register(RegisterCommandEvent.class);
     }

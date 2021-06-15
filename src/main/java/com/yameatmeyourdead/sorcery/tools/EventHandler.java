@@ -16,14 +16,13 @@ public class EventHandler {
     // Attach Capabilities to relevant objects
     @SubscribeEvent
     public static void attachCapabilityToEntity(AttachCapabilitiesEvent<Entity> event) {
-        if(event.getObject() instanceof PlayerEntity) {
-            Sorcery.LOGGER.debug("POOPMODE");
+        if(event.getObject() != null && event.getObject() instanceof PlayerEntity) {
             event.addCapability(new ResourceLocation(Sorcery.MODID, "research_capability"), new CapabilityProviderResearcher());
         }
     }
 
     @SubscribeEvent
-    public static void onPlayerDeath(PlayerEvent.Clone event) {
+    public static void onClonePlayer(PlayerEvent.Clone event) {
         if(!event.isWasDeath()) return;
         // get old and new player
         PlayerEntity oldPlayer = event.getOriginal();

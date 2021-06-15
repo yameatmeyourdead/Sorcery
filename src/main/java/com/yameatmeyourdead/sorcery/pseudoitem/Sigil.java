@@ -1,6 +1,6 @@
 package com.yameatmeyourdead.sorcery.pseudoitem;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
 import javax.annotation.Nullable;
@@ -14,8 +14,8 @@ public class Sigil extends net.minecraftforge.registries.ForgeRegistryEntry<Sigi
     private Sigil[] components;
     private ResourceLocation image;
 
-    private static ArrayList<Sigil> primal = new ArrayList<Sigil>();
-    private static LinkedHashMap<String, Sigil> sigils = new LinkedHashMap<String, Sigil>();
+    private static LinkedHashMap<String, Sigil> primals = new LinkedHashMap<>();
+    private static LinkedHashMap<String, Sigil> sigils = new LinkedHashMap<>();
 
     /**
      * Base Constructor
@@ -51,6 +51,10 @@ public class Sigil extends net.minecraftforge.registries.ForgeRegistryEntry<Sigi
 
     public int getColor() {
         return color;
+    }
+
+    public Collection<Sigil> getPrimalSigils() {
+        return primals.values();
     }
 
     public void setName(String name) {

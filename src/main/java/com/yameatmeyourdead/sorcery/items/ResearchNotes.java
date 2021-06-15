@@ -3,13 +3,10 @@ package com.yameatmeyourdead.sorcery.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearcher;
-import com.yameatmeyourdead.sorcery.capabilities.Researcher;
 import com.yameatmeyourdead.sorcery.research.ResearchBase;
 import com.yameatmeyourdead.sorcery.research.ResearchManager;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -30,7 +27,7 @@ public class ResearchNotes extends Item {
     @Override
     public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
         if(research == null) return ActionResultType.FAIL;
-        if(ResearchManager.completeResearch(context.getPlayer(), research.getName())) {
+        if(ActionResultType.PASS == ResearchManager.completeResearch(context.getPlayer(), research)) {
             stack.setCount(0);
             return ActionResultType.PASS;
         }

@@ -49,6 +49,10 @@ public class TileInventory extends TileEntity implements IInventory {
         return nbt;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public int getContainerSize() {
         return this.size;

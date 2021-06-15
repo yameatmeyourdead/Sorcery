@@ -3,6 +3,8 @@ package com.yameatmeyourdead.sorcery.capabilities;
 import java.util.Arrays;
 import java.util.List;
 
+import com.yameatmeyourdead.sorcery.research.ResearchManager;
+
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -15,6 +17,7 @@ public class Researcher {
 
     public Researcher() {
         this.researchCompleted = NonNullList.create();
+        ResearchManager.getAutoUnlockResearch().forEach(research -> this.researchCompleted.add(research.getName()));
         this.insanity = 0;
     }
 

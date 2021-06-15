@@ -6,10 +6,13 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.yameatmeyourdead.sorcery.capabilities.CapabilityPlayerResearcher;
 import com.yameatmeyourdead.sorcery.capabilities.Researcher;
+import com.yameatmeyourdead.sorcery.research.ResearchManager;
 
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class AddResearchCommand {
@@ -29,10 +32,20 @@ public class AddResearchCommand {
             Researcher researchInterface = source.getCapability(CapabilityPlayerResearcher.CAPABILITY_PLAYER_RESEARCHER).orElse(null);
             if(researchInterface == null) return 1;
             
-            // TODO: FIX
-            // if(!researchInterface.addResearch(StringArgumentType.getString(ctx, "Research_Name").toLowerCase())) {
-            //     source.sendMessage(new TranslationTextComponent("You already have this knowledge."), source.getUUID());
-            // }
+            ActionResultType result = ResearchManager.completeResearch((PlayerEntity)ctx.getSource().getEntity(), ResearchManager.getResearch(StringArgumentType.getString(ctx, "Research_Name").toLowerCase()));
+            switch(result){
+                case SUCCESS:
+                    source.sendMessage(new TranslationTextComponent("You have acquired knowledge."), source.getUUID());
+                    break;
+                case PASS:
+                    source.sendMessage(new TranslationTextComponent("Invalid research name."), source.getUUID());
+                    break;
+                case FAIL:
+                    source.sendMessage(new TranslationTextComponent("You already have this knowledge."), source.getUUID());
+                    break;
+                case CONSUME: 
+                    break;
+            }
         }
         return 1;
     }
