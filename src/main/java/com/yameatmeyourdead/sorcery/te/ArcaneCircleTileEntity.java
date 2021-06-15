@@ -12,6 +12,7 @@ import net.minecraft.util.Direction;
 public class ArcaneCircleTileEntity extends TileInventory implements ITickableTileEntity {
     public boolean isActive = false;
     public int activeCounter = 0;
+    private int rotationDeg = 0;
     public Direction rotation = Direction.from2DDataValue(0);
 
     public ArcaneCircleTileEntity(TileEntityType<?> type) {
@@ -24,6 +25,15 @@ public class ArcaneCircleTileEntity extends TileInventory implements ITickableTi
 
     public Direction getRotation() {
         return rotation;
+    }
+
+    public float advanceRotation() {
+        rotationDeg = (rotationDeg+1) % 10000;
+        return rotationDeg;
+    }
+
+    public void toggleActive() {
+        this.isActive = !this.isActive;
     }
 
     @Override
