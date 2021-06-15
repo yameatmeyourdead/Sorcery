@@ -1,6 +1,5 @@
 package com.yameatmeyourdead.sorcery.blocks;
 
-import com.mojang.realmsclient.gui.RealmsServerSlotButton.Action;
 import com.yameatmeyourdead.sorcery.setup.Registration;
 import com.yameatmeyourdead.sorcery.te.ArcaneCircleTileEntity;
 

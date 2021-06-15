@@ -8,6 +8,7 @@ import com.yameatmeyourdead.sorcery.tools.EventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
@@ -59,6 +60,7 @@ public class Sorcery
     {
         ClientRegistry.bindTileEntityRenderer(Registration.ARCANE_CIRCLE_ENTITY_TYPE.get(), ArcaneCircleRenderer::new);
         RenderTypeLookup.setRenderLayer(Registration.SORCERERS_TABLE.get(), RenderType.translucent());
+        ScreenManager.register(, p_216911_1_);
     }
 
     @SubscribeEvent
