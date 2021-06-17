@@ -1,7 +1,9 @@
 package com.yameatmeyourdead.sorcery.items;
 
 import com.yameatmeyourdead.sorcery.Sorcery;
+import com.yameatmeyourdead.sorcery.client.gui.GuiSignomicon;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,7 +19,8 @@ public class Signomicon extends Item {
     
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        player.openItemGui(player.getItemInHand(hand), hand);
+        if(world.isClientSide)
+            Minecraft.getInstance().setScreen(new GuiSignomicon());
         return ActionResult.sidedSuccess(player.getItemInHand(hand), world.isClientSide);
     }
 }

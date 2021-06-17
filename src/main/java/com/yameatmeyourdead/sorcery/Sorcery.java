@@ -32,6 +32,7 @@ public class Sorcery
 {
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MODID = "sorcery";
+
     
     public Sorcery() 
     {
@@ -60,7 +61,6 @@ public class Sorcery
     {
         ClientRegistry.bindTileEntityRenderer(Registration.ARCANE_CIRCLE_ENTITY_TYPE.get(), ArcaneCircleRenderer::new);
         RenderTypeLookup.setRenderLayer(Registration.SORCERERS_TABLE.get(), RenderType.translucent());
-        ScreenManager.register(, p_216911_1_);
     }
 
     @SubscribeEvent
