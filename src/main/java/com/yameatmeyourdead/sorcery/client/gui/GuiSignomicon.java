@@ -13,11 +13,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class GuiSignomicon extends Screen {
     private static ResourceLocation GUI_TEXTURE = new ResourceLocation(Sorcery.MODID, "textures/gui/signomicon.png");
+    private int xSize;
+    private int ySize;
 
     public GuiSignomicon() {
         super(new StringTextComponent("Signomicon"));
-        this.height = 176;
-        this.width = 240;
+        this.xSize = 256;
+        this.ySize = 256;
     }
 
     @Override
@@ -26,12 +28,15 @@ public class GuiSignomicon extends Screen {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
+    
     @SuppressWarnings("deprecation")
     @Override
     public void renderBackground(MatrixStack matrixStack) {
+        // x = 320 middle of screen
         RenderSystem.color4f(1f, 1f, 1f, 1f);
+        this.renderBackground(matrixStack, 1);
         this.minecraft.getTextureManager().bind(GUI_TEXTURE);
-        this.blit(matrixStack, 100, 100, 0, 0, this.width, this.height);
+        this.blit(matrixStack, 192, 32, 0, 0, this.xSize, this.ySize);
     }
 
     @Override
